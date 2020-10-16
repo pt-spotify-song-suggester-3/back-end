@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET || "plastic luigi pipe";
 
-//auth header should follow OAuth Bearer Token 
+//auth header should follow OAuth Bearer Token flow
 module.exports = (req, res, next) => {
     //removes "Bearer" from the token if exists, otherwise sets to undefined
     const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : undefined;
