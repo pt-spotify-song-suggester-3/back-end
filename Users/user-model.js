@@ -2,10 +2,14 @@ const { where } = require("../data/dbConfig");
 const db = require("../data/dbConfig");
 
 async function add(data) {
-    const {username} = await db("users").insert(data);
+    const [id] = await db("users").insert(data);
 
-    return findBy(username)
+    return findById(id)
 }
+
+// function add(data) {
+//     return db("users").insert(data);
+// }
 
 function findBy(filter) {
     return db("users").where(filter).first();
