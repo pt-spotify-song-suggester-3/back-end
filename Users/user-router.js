@@ -9,7 +9,7 @@ router.post("/register", (req, res, next) => {
 
     if(user.username && user.password){
         //using bcrypt to hash the password with a complexity of 10
-        const hash = bcryptjs.hashSync(user.password, 10)
+        const hash = bcryptjs.hashSync(user.password, 10) 
         user.password = hash;
 
         User.add(user)
@@ -51,7 +51,7 @@ router.put("/:id", (req, res, next) => {
     User.findById(id)
     .then(user => {
         if(user){
-            User.update(req.body, id)
+            User.update(id, req.body)
             .then(user => {
                 res.status(200).json(user);
             })
