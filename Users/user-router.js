@@ -3,19 +3,7 @@ const bcryptjs = require("bcryptjs");
 const User = require("./user-model");
 const generateToken = require("../utils/generate-token");
 const playlistRouter = require("../Playlists/playlist-router");
-const { findById } = require("./user-model");
-
-router.get("/:id", (req, res, next) => {
-    const {id} = req.params;
-
-    User.findById(id)
-    .then(user => {
-        res.status(200).json(user)
-    })
-    .catch(err => {
-        next({apiCode: 500, apiMessage: "error retrieving user", ...err});
-    })
-});
+const authenticate = require("./authenticate-middleware");
 
 router.post("/register", (req, res, next) => {
     let user = req.body;
@@ -56,6 +44,20 @@ router.post("/login", (req, res, next) => {
         .catch(err => {
             next({apiCode: 500, apiMessage: "error logging in", ...err});
         });
+});
+
+router.use("/:id", authenticate);
+
+router.get("/:id", (req, res, next) => {
+    const {id} = req.params;
+
+    User.findById(id)
+    .then(user => {
+        res.status(200).json(user)
+    })
+    .catch(err => {
+        next({apiCode: 500, apiMessage: "error retrieving user", ...err});
+    })
 });
 
 router.put("/:id", (req, res, next) => {

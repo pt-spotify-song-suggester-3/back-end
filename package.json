@@ -4,7 +4,7 @@
   "description": "Spotify Song Suggester 3 Back End",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env DB_ENV=testing jest --watch",
     "server": "nodemon index.js",
     "start": "node index.js"
   },
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/pt-spotify-song-suggester-3/back-end#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
@@ -27,6 +28,11 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.5"
+    "jest": "^26.6.0",
+    "nodemon": "^2.0.5",
+    "supertest": "^5.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
