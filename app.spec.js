@@ -14,7 +14,14 @@ const failUser = {
     password: undefined
 };
 
+//look into mocking data
+
 describe("app.js", () => {
+
+    it("should run in testing env", () => {
+        expect(process.env.DB_ENV).toBe("testing"); 
+    });
+
     describe("User Router", () => {
         describe("register endpoint", () => {
             it("should return status code 201 on testUser", async() => {
