@@ -15,7 +15,7 @@ const failUser = {
 };
 
 //look into mocking data
-
+ 
 describe("app.js", () => {
 
     it("should run in testing env", () => {
@@ -23,6 +23,7 @@ describe("app.js", () => {
     });
 
     describe("User Router", () => {
+
         describe("register endpoint", () => {
             it("should return status code 201 on testUser", async() => {
                 await db("users").truncate();
@@ -35,8 +36,9 @@ describe("app.js", () => {
                 expect(res.status).toBe(500)
             });
         });
+
         describe("login endpoint", () => {
-            it("should return status code 201 on testUser", async() => {
+            it("should return status code 200 on testUser", async() => {
                 const res = await request(app).post("/api/user/login").send(testUser); 
                 expect(res.status).toBe(200)
             });
@@ -45,6 +47,7 @@ describe("app.js", () => {
                 expect(res.status).toBe(500)
             });
         })
+
         describe("get user endpoint", () => {
             it("should fail with 401 without authorization header", async() => {
                 const res = await request(app).get("/api/user/1")
@@ -54,6 +57,7 @@ describe("app.js", () => {
                 const res = await request(app).get("/api/user/1");
                 expect(res.type).toBe("application/json");
             });
+
         });
     });
 });

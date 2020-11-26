@@ -4,7 +4,7 @@
   "description": "Spotify Song Suggester 3 Back End",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watch",
+    "test": "cross-env DB_ENV=testing jest --watch -i",
     "server": "nodemon index.js",
     "start": "node index.js"
   },
@@ -25,6 +25,7 @@
     "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.6",
+    "pg": "^8.5.1",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
