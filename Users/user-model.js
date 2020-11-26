@@ -1,26 +1,23 @@
-const { where } = require("../data/dbConfig");
 const db = require("../data/dbConfig");
 
 async function add(data) {
-    const [id] = await db("users").insert(data);
+    const [id] = await db("users").insert(data, "id");
 
-    return findById(id)
+    return findBy({id})
 }
-
-// function add(data) {
-//     return db("users").insert(data);
-// }
 
 function findBy(filter) {
     return db("users").where(filter).first();
 }
 
-function findById(id) {
-    return db("users").where({id}).first();
+function findAllBy(filter) {
+    return db("users").where(filter);
 }
 
-function update(id, data) {
-    return db("users").update(data).where({id});
+async function update(id, data) {
+     await db("users").update(data).where({id});
+
+     return findBy({id});
 }
 
 function remove(id) {
@@ -30,7 +27,7 @@ function remove(id) {
 function findUserPlaylistsById(id) {
     return db("playlists")
         .join("users", "users.id", "playlists.user_id")
-        .select("*")
+        .select("name")
         .where({user_id: id});
 }
 
@@ -42,7 +39,7 @@ function createPlaylist(data) {
 module.exports = {
     add,
     findBy,
-    findById,
+    findAllBy,
     update,
     remove,
     findUserPlaylistsById,

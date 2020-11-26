@@ -51,7 +51,7 @@ router.use("/:id", authenticate);
 router.get("/:id", (req, res, next) => {
     const {id} = req.params;
 
-    User.findById(id)
+    User.findBy({id})
     .then(user => {
         res.status(200).json(user)
     })
@@ -63,7 +63,7 @@ router.get("/:id", (req, res, next) => {
 router.put("/:id", (req, res, next) => {
     const {id} = req.params;
 
-    User.findById(id)
+    User.findBy({id})
     .then(user => {
         if(user){
             User.update(id, req.body)
